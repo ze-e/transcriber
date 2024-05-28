@@ -1,0 +1,6 @@
+@echo off
+cd /d %~dp0
+echo Starting the Flask server...
+start /B python app.py
+echo Opening the browser...
+start http://127.0.0.1:5000
