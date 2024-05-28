@@ -1,25 +1,12 @@
 from flask import Flask, request, render_template, jsonify, send_from_directory, abort
-<<<<<<< HEAD
 import assemblyai as aai
 from moviepy.editor import VideoFileClip
-import os
-import time
-from keys import AAI_API_KEY
-=======
 import whisper
-import assemblyai as aai
-from moviepy.editor import VideoFileClip
 import os
->>>>>>> whisper
 
 app = Flask(__name__)
 output_folder = os.path.abspath("output")
 
-<<<<<<< HEAD
-aai.settings.api_key = AAI_API_KEY
-
-=======
->>>>>>> whisper
 @app.route('/', methods=['GET'])
 def home():
     return render_template('upload.html')
@@ -49,20 +36,6 @@ def upload_file():
         audio_path = file_path.rsplit('.', 1)[0] + '.wav'
         video.audio.write_audiofile(audio_path)
 
-<<<<<<< HEAD
-        # transcribe
-        config = aai.TranscriptionConfig(speaker_labels=True)
-        transcriber = aai.Transcriber()
-        result = transcriber.transcribe(
-        audio_path,
-        config=config
-        )
-        transcript_filename = file.filename.rsplit('.', 1)[0] + '_transcript.txt'
-        transcript_path = os.path.join(output_folder, transcript_filename)
-        with open(transcript_path, 'w') as f:
-            for utterance in result.utterances:
-                f.write(f"{utterance.speaker.upper()}: {utterance.text}\n")
-=======
     # transcribe
     transcript_filename = file.filename.rsplit('.', 1)[0] + '_transcript.txt'
     transcript_path = os.path.join(output_folder, transcript_filename)
@@ -81,7 +54,6 @@ def upload_file():
             audio_path,
             config=config
         )
->>>>>>> whisper
 
         with open(transcript_path, 'w') as f:
             for utterance in result.utterances:
