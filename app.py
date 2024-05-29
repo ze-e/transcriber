@@ -3,8 +3,12 @@ import assemblyai as aai
 from moviepy.editor import VideoFileClip
 import whisper
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
+app.config["DEBUG"] = os.environ.get("FLASK_DEBUG")
+
 output_folder = os.path.abspath("output")
 
 @app.route('/', methods=['GET'])
@@ -45,8 +49,7 @@ def upload_file():
             f.write(result["text"])
     
     elif type == 'assembly':
-        from keys import AAI_API_KEY
-        aai.settings.api_key = AAI_API_KEY
+        aai.settings.api_key = os.environ.get("da18977fc8014951af75e372891758d2")
         config = aai.TranscriptionConfig(speaker_labels=True)
         transcriber = aai.Transcriber()
         result = transcriber.transcribe(
@@ -70,4 +73,4 @@ def download_file(filename):
     return send_from_directory(output_folder, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
