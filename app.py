@@ -14,8 +14,7 @@ def home():
 @app.route('/upload', methods=['POST'])
 def upload_file():
     file = request.files['file']
-    type = request.args.get('transcriber', 'whisper').lower()
-
+    type = request.args.get('transcriber', 'assembly').lower()
     # Ensure the output directory exists
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -58,7 +57,8 @@ def upload_file():
         with open(transcript_path, 'w') as f:
             for utterance in result.utterances:
                 f.write(f"{utterance.speaker.upper()}: {utterance.text}\n")
-
+    else:
+        raise Exception("No transcriber type found")
     transcript_url = request.host_url + 'output/' + transcript_filename
     return jsonify({'message': 'File uploaded and processed successfully', 'transcript_url': transcript_url}), 200
 
