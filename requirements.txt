@@ -20,7 +20,8 @@ imageio-ffmpeg==0.4.9
 intel-openmp==2021.4.0
 itsdangerous==2.2.0
 Jinja2==3.1.4
-llvmlite==0.42.0
+llvmlite
+gunicorn
 MarkupSafe==2.1.5
 mkl==2021.4.0
 more-itertools==10.2.0
