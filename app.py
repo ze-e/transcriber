@@ -49,7 +49,7 @@ def upload_file():
             f.write(result["text"])
     
     elif type == 'assembly':
-        aai.settings.api_key = os.environ.get("da18977fc8014951af75e372891758d2")
+        aai.settings.api_key = os.environ.get("AAI_API_KEY")
         config = aai.TranscriptionConfig(speaker_labels=True)
         transcriber = aai.Transcriber()
         result = transcriber.transcribe(
