@@ -32,7 +32,7 @@ def upload_file():
     file_path = os.path.join(output_folder, file.filename)
     file.save(file_path)
 
-    if file.filename.lower().endswith('.wav'):
+    if file.filename.lower().endswith('.wav') or file.filename.lower().endswith('.mp3') or file.filename.lower().endswith('.m4a'):
         audio_path = file_path
     else:
         video = VideoFileClip(file_path)
