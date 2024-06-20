@@ -38,13 +38,13 @@
         <br/>
         <br/>
         <div>
-            <label for="transcriber">Choose a transcriber:</label>
+            <label for="transcriber"><strong>Choose a transcriber:</strong><br>(See descriptions below)</label>
             <select id="transcriber" name="transcriber" required>
                 <option value="assembly" selected>Assembly</option>
                 <option value="whisper">Whisper</option>
             </select>
-            <p>assembly - separates speakers.<br>
-                whisper - returns one single block of text. Use if assembly does not work.</p>
+            <p>assembly - separates transcript by speakers<br>
+                whisper - returns one single block of text with timestamps</p>
         </div>
         <button type="submit">Click To Upload!</button>
     </form>

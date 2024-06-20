@@ -4,6 +4,7 @@ from moviepy.editor import VideoFileClip
 import whisper
 import os
 from dotenv import load_dotenv
+from utils import format_timestamp
 
 load_dotenv()
 app = Flask(__name__)
@@ -46,7 +47,11 @@ def upload_file():
         model = whisper.load_model("medium")
         result = model.transcribe(audio_path)
         with open(transcript_path, 'w') as f:
-            f.write(result["text"])
+            with open(transcript_path, 'w') as f:
+                for segment in result["segments"]:
+                    start_time = segment["start"]
+                    text = segment["text"]
+                    f.write(f"{format_timestamp(start_time)} - {text}\n")
     
     elif type == 'assembly':
         aai.settings.api_key = os.environ.get("AAI_API_KEY")
